@@ -8,7 +8,7 @@ const GunlukBurclar = require("../Model/Burclar");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './');
+    cb(null, './uploads/');
   },
   filename: function (req, file, cb) {
     cb(null,file.originalname);
@@ -54,7 +54,7 @@ router.post("/update", upload.single('productImage'), (req, res, next) => {
             Yazi: req.body.Yazi,
             request: {
                 type: 'GET',
-                url: "http://localhost:3000/"
+                url: "http://localhost:3000"
             }
         }
       });
