@@ -99,4 +99,15 @@ router.get('/list', (req, res, next) => {
 });
 
 
+
+router.put('/DayUpdate', (req, res, next) => {
+  const promise = GunlukBurclar.findByIdAndUpdate(req.params.DayUpdate ,req.body);
+  promise.then((data) => {
+    res.json({data});
+  }).catch((err) => {
+    res.json(err)
+  })
+});
+
+
 module.exports = router;
