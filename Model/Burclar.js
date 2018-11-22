@@ -16,6 +16,12 @@ const BurcSchema = new Schema({
     Tarih2:{
         type:String,
     },
+    Tarih3:{
+        type:String,
+    },
+    Tarih4:{
+        type:String,
+    },
     Yazi: {
         type: String,
     },
