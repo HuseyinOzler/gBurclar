@@ -13,9 +13,19 @@ const BurcSchema = new Schema({
     Tarih: {
         type: String,
     },
+    Tarih2:{
+        type:String,
+    },
     Yazi: {
         type: String,
     },
+    YaziHafta:{
+        type:String
+    },
+    YaziAy:{
+        type:String,
+    }
+
 });
 
 module.exports = mongoose.model('GunlukBurc', BurcSchema)

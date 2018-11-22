@@ -34,12 +34,14 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
-
 router.post("/update", upload.single('productImage'), (req, res, next) => {
   const product = new GunlukBurclar({
     BurcAdi: req.body.BurcAdi,
     Tarih: req.body.Tarih,
+    Tarih2: req.body.Tarih2,
     Yazi: req.body.Yazi,
+    YaziHafta: req.body.YaziHafta,
+    YaziAy: req.body.YaziAy,
     productImage: req.file.path
   });
   product
@@ -51,7 +53,10 @@ router.post("/update", upload.single('productImage'), (req, res, next) => {
         createdProduct: {
             BurcAdi: result.BurcAdi,
             Tarih: req.body.Tarih,
+            Tarih2: req.body.Tarih2,
             Yazi: req.body.Yazi,
+            YaziHafta: req.body.YaziHafta,
+            YaziAy: req.body.YaziAy,
             request: {
                 type: 'GET',
                 url: "http://localhost:3000"
