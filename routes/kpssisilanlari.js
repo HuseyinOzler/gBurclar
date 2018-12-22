@@ -3,9 +3,9 @@ var router = express.Router();
 const mongoose = require("mongoose");
 const multer = require('multer');
 
-const GunlukBurclar = require("../Model/Burclar");
+const Kpssisilanlari = require("../Model/KpssModel");
 
-
+/*
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './uploads/');
@@ -35,7 +35,7 @@ const upload = multer({
 });
 
 router.post("/update", upload.single('productImage'), (req, res, next) => {
-  const product = new GunlukBurclar({
+  const product = new Kpssisilanlari({
     BurcAdi: req.body.BurcAdi,
     Tarih: req.body.Tarih,
     Tarih2: req.body.Tarih2,
@@ -75,12 +75,11 @@ router.post("/update", upload.single('productImage'), (req, res, next) => {
       });
     });
 });
-
-
+*/
 
 
 router.post('/',(req,res,next) => {
-  const Gburclar = new GunlukBurclar(req.body);
+  const Gburclar = new Kpssisilanlari(req.body);
   const promise =  Gburclar.save();
   promise.then((data) => {
     res.json(data);
@@ -90,7 +89,7 @@ router.post('/',(req,res,next) => {
 });
 
 router.get('/list', (req, res, next) => {
-  const promise = GunlukBurclar.find({});
+  const promise = Kpssisilanlari.find({});
   promise.then((data) => {
     res.json({data});
   }).catch((err) => {
@@ -100,13 +99,25 @@ router.get('/list', (req, res, next) => {
 
 
 
-router.put('/DayUpdate', (req, res, next) => {
-  const promise = GunlukBurclar.findByIdAndUpdate(req.params.DayUpdate ,req.body);
+router.put('/:DayUpdate', (req, res, next) => {
+  const promise = Kpssisilanlari.findByIdAndUpdate(
+    req.params.DayUpdate,
+    req.body,
+    {
+      new:true
+    }
+  );
   promise.then((data) => {
-    res.json({data});
+    if (!data)
+      next({
+        message: 'The data was not found.',
+        code: 99
+      });
+
+    res.json(data);
   }).catch((err) => {
-    res.json(err)
-  })
+    res.json(err);
+  });
 });
 
 
